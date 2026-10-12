@@ -1,5 +1,28 @@
-<svg class="mascot " viewBox="-8 -52 262 362" role="img" aria-label="น้องซี้ มาสคอตเกมเซียมซี้" xmlns="http://www.w3.org/2000/svg">
+<svg class="mascot " viewBox="-30 -52 296 372" role="img" aria-label="น้องซี้ มาสคอตเกมเซียมซี้" xmlns="http://www.w3.org/2000/svg">
   <title>น้องซี้ มาสคอตเกมเซียมซี้</title>
+  <defs>
+    <!-- ขอบขนฟู: สุ่มเลื่อนพิกเซลรอบขอบให้เป็นเส้นขนเล็ก ๆ -->
+    <filter id="m1-fur" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+    </filter>
+    <!-- ขนยาวสำหรับปอมปอม/ขอบนอก -->
+    <filter id="m1-shag" x="-35%" y="-35%" width="170%" height="170%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="11" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="16" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+    </filter>
+    <filter id="m1-fur-soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="8" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+    </filter>
+    <!-- ลายขนบนตัว: จุดสว่าง/มืดละเอียด วางทับแบบ soft-light -->
+    <filter id="m1-fuzz" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.55 1.6" numOctaves="3" seed="5"></feTurbulence>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 2.2 -1.05"></feColorMatrix>
+    </filter>
+    <clipPath id="m1-shape"><rect x="50" y="90" width="140" height="186" rx="26"></rect></clipPath>
+  </defs>
+  <g class="mascot-dance">
   <g class="mascot-shake">
     <g class="sticks"><g transform="rotate(-9 78 120)">
         <rect x="71" y="34" width="14" height="110" rx="5" fill="#F4C267" stroke="#111111" stroke-width="4"></rect>
@@ -18,42 +41,85 @@
         <rect x="155" y="38" width="14" height="14" rx="5" fill="#E8202A" stroke="#111111" stroke-width="4"></rect>
       </g></g>
     
+    <!-- เท้าปอมปอม -->
+    <g class="foot foot-l"><g filter="url(#m1-shag)">
+      <circle cx="88" cy="284" r="20" fill="#FFF4DC"></circle>
+      <circle cx="91.6" cy="288.4" r="16" fill="#111111" opacity=".18"></circle>
+      <circle cx="82" cy="277.6" r="8.4" fill="#fff" opacity=".45"></circle>
+    </g></g>
+    <g class="foot foot-r"><g filter="url(#m1-shag)">
+      <circle cx="152" cy="284" r="20" fill="#FFF4DC"></circle>
+      <circle cx="155.6" cy="288.4" r="16" fill="#111111" opacity=".18"></circle>
+      <circle cx="146" cy="277.6" r="8.4" fill="#fff" opacity=".45"></circle>
+    </g></g>
     <!-- เงาทึบแบบสติกเกอร์ -->
-    <rect x="58" y="98" width="140" height="186" rx="24" fill="#111111"></rect>
-    <!-- ตัวกระบอก -->
-    <rect x="50" y="90" width="140" height="186" rx="24" fill="#E8202A" stroke="#111111" stroke-width="6"></rect>
-    <ellipse cx="120" cy="92" rx="70" ry="15" fill="#8E0F17" stroke="#111111" stroke-width="6"></ellipse>
-    
+    <g filter="url(#m1-fur-soft)"><rect x="58" y="98" width="140" height="186" rx="26" fill="#111111"></rect></g>
+    <!-- ตัวกระบอกขนฟู -->
+    <g class="body">
+      <!-- ปุยขนยาวรอบตัว -->
+      <g filter="url(#m1-shag)">
+        <rect x="46" y="86" width="148" height="194" rx="30" fill="#111111"></rect>
+      </g>
+      <g filter="url(#m1-shag)">
+        <rect x="52" y="92" width="136" height="182" rx="24" fill="#E8202A"></rect>
+      </g>
+      <g filter="url(#m1-fur)">
+        <rect x="56" y="96" width="128" height="174" rx="22" fill="#E8202A"></rect>
+      </g>
+      <g clip-path="url(#m1-shape)">
+        <rect x="50" y="90" width="140" height="186" filter="url(#m1-fuzz)" opacity=".5" style="mix-blend-mode:soft-light"></rect>
+        <ellipse cx="96" cy="140" rx="34" ry="60" fill="#fff" opacity=".12"></ellipse>
+      </g>
+      <g filter="url(#m1-fur-soft)">
+        <ellipse cx="120" cy="92" rx="70" ry="15" fill="#8E0F17" stroke="#111111" stroke-width="5"></ellipse>
+        
     <rect x="52" y="108" width="136" height="24" fill="#FFD23F" stroke="#111111" stroke-width="4"></rect>
     <path d="M54 129 L62.5 113 L71 129 Z M71 129 L79.5 113 L88 129 Z M88 129 L96.5 113 L105 129 Z M105 129 L113.5 113 L122 129 Z M122 129 L130.5 113 L139 129 Z M139 129 L147.5 113 L156 129 Z M156 129 L164.5 113 L173 129 Z" fill="#E8202A" stroke="#111111" stroke-width="2.5" stroke-linejoin="round"></path>
-    
+        
     <rect x="52" y="238" width="136" height="22" fill="#FFD23F" stroke="#111111" stroke-width="4"></rect>
     <path d="M54 257 L62.5 243 L71 257 Z M71 257 L79.5 243 L88 257 Z M88 257 L96.5 243 L105 257 Z M105 257 L113.5 243 L122 257 Z M122 257 L130.5 243 L139 257 Z M139 257 L147.5 243 L156 257 Z M156 257 L164.5 243 L173 257 Z" fill="#E8202A" stroke="#111111" stroke-width="2.5" stroke-linejoin="round"></path>
-    <!-- แขนซ้าย (โบกมือ) -->
-    <path d="M54 196 C30 196 18 176 16 150" fill="none" stroke="#111111" stroke-width="9" stroke-linecap="round"></path>
-    <circle cx="16" cy="140" r="15" fill="#fff" stroke="#111111" stroke-width="5"></circle>
-    <path d="M6 136 l-6 -8 M14 126 l-2 -10 M24 128 l4 -9" stroke="#111111" stroke-width="4" stroke-linecap="round"></path>
+      </g>
+    </g>
+    <!-- แขนซ้าย (โบกมือ) มือเป็นปอมปอม -->
+    <g class="arm arm-l">
+      <path d="M54 196 C30 196 18 176 16 150" fill="none" stroke="#111111" stroke-width="9" stroke-linecap="round"></path>
+      <g filter="url(#m1-shag)">
+      <circle cx="16" cy="134" r="25" fill="#FFD23F"></circle>
+      <circle cx="20.5" cy="139.5" r="20" fill="#111111" opacity=".18"></circle>
+      <circle cx="8.5" cy="126" r="10.5" fill="#fff" opacity=".45"></circle>
+    </g>
+    </g>
     <!-- แขนขวา (เท้าเอว) -->
-    <path d="M186 186 C214 186 222 204 210 222" fill="none" stroke="#111111" stroke-width="9" stroke-linecap="round"></path>
-    <circle cx="206" cy="226" r="14" fill="#fff" stroke="#111111" stroke-width="5"></circle>
+    <g class="arm arm-r">
+      <path d="M186 186 C214 186 222 204 210 222" fill="none" stroke="#111111" stroke-width="9" stroke-linecap="round"></path>
+      <g filter="url(#m1-shag)">
+      <circle cx="210" cy="230" r="24" fill="#FF3EA5"></circle>
+      <circle cx="214.32" cy="235.28" r="19.200000000000003" fill="#111111" opacity=".18"></circle>
+      <circle cx="202.8" cy="222.32" r="10.08" fill="#fff" opacity=".45"></circle>
+    </g>
+    </g>
     <!-- หน้า: ตาปรือ คิ้วกวน -->
     <g class="face">
-      <path d="M78 150 L104 144" stroke="#111111" stroke-width="6" stroke-linecap="round"></path>
-      <path d="M134 140 L160 146" stroke="#111111" stroke-width="6" stroke-linecap="round"></path>
-      <path d="M76 166 A16 14 0 0 0 108 166 Z" fill="#fff" stroke="#111111" stroke-width="5" stroke-linejoin="round"></path>
-      <path d="M132 166 A16 14 0 0 0 164 166 Z" fill="#fff" stroke="#111111" stroke-width="5" stroke-linejoin="round"></path>
-      <circle cx="96" cy="171" r="5.5" fill="#111111"></circle>
-      <circle cx="152" cy="171" r="5.5" fill="#111111"></circle>
-      <path d="M73 166 H111 M129 166 H167" stroke="#111111" stroke-width="7" stroke-linecap="round"></path>
-      <ellipse cx="74" cy="192" rx="10" ry="6" fill="#FF8CC6"></ellipse>
-      <ellipse cx="166" cy="192" rx="10" ry="6" fill="#FF8CC6"></ellipse>
+      <g class="brows">
+        <path d="M78 150 L104 144" stroke="#111111" stroke-width="6" stroke-linecap="round"></path>
+        <path d="M134 140 L160 146" stroke="#111111" stroke-width="6" stroke-linecap="round"></path>
+      </g>
+      <g class="eyes">
+        <path d="M76 166 A16 14 0 0 0 108 166 Z" fill="#fff" stroke="#111111" stroke-width="5" stroke-linejoin="round"></path>
+        <path d="M132 166 A16 14 0 0 0 164 166 Z" fill="#fff" stroke="#111111" stroke-width="5" stroke-linejoin="round"></path>
+        <circle cx="96" cy="171" r="5.5" fill="#111111"></circle>
+        <circle cx="152" cy="171" r="5.5" fill="#111111"></circle>
+        <path d="M73 166 H111 M129 166 H167" stroke="#111111" stroke-width="7" stroke-linecap="round"></path>
+      </g>
+      <ellipse cx="74" cy="192" rx="11" ry="7" fill="#FF8CC6" filter="url(#m1-fur-soft)"></ellipse>
+      <ellipse cx="166" cy="192" rx="11" ry="7" fill="#FF8CC6" filter="url(#m1-fur-soft)"></ellipse>
       <!-- ยิ้มมุมปาก + แลบลิ้น -->
-      <path d="M128 213 v9 a8 8 0 0 0 16 0 v-11" fill="#FF5C8A" stroke="#111111" stroke-width="4.5" stroke-linejoin="round"></path>
-      <path d="M136 214 v8" stroke="#111111" stroke-width="2.5" stroke-linecap="round"></path>
+      <g class="tongue">
+        <path d="M128 213 v9 a8 8 0 0 0 16 0 v-11" fill="#FF5C8A" stroke="#111111" stroke-width="4.5" stroke-linejoin="round"></path>
+        <path d="M136 214 v8" stroke="#111111" stroke-width="2.5" stroke-linecap="round"></path>
+      </g>
       <path d="M102 206 Q124 220 150 204" fill="none" stroke="#111111" stroke-width="6" stroke-linecap="round"></path>
     </g>
-    <!-- เท้า -->
-    <ellipse cx="92" cy="284" rx="18" ry="8" fill="#111111"></ellipse>
-    <ellipse cx="152" cy="284" rx="18" ry="8" fill="#111111"></ellipse>
+  </g>
   </g>
 </svg>

@@ -219,7 +219,7 @@ a {
   gap: 6px;
 }
 .logo-mascot {
-  width: 104px;
+  width: 116px;
   flex: none;
 }
 .logo-mascot svg {
@@ -1109,8 +1109,118 @@ textarea {
   transform: translate(-50%, 0);
 }
 
+/* ---------- น้องซี้เต้นดุ๊กดิ๊ก (ตอนว่าง) */
+.mascot .mascot-dance,
+.mascot .arm,
+.mascot .foot,
+.mascot .eyes,
+.mascot .tongue,
+.mascot .body {
+  transform-box: fill-box;
+}
+.mascot .mascot-dance {
+  transform-origin: 50% 100%;
+  animation: dance 0.9s cubic-bezier(0.45, 0, 0.3, 1) infinite;
+}
+.mascot .arm-l {
+  transform-origin: 100% 100%;
+  animation: wave-l 0.45s ease-in-out infinite alternate;
+}
+.mascot .arm-r {
+  transform-origin: 0% 20%;
+  animation: wave-r 0.9s ease-in-out infinite alternate;
+}
+.mascot .foot-l {
+  transform-origin: 50% 50%;
+  animation: step 0.9s ease-in-out infinite;
+}
+.mascot .foot-r {
+  transform-origin: 50% 50%;
+  animation: step 0.9s ease-in-out infinite 0.45s;
+}
+.mascot .body {
+  transform-origin: 50% 100%;
+  animation: fluff 0.45s ease-in-out infinite alternate;
+}
+.mascot .eyes {
+  transform-origin: 50% 70%;
+  animation: blink 3.6s infinite;
+}
+.mascot .tongue {
+  transform-origin: 50% 0%;
+  animation: tongue 0.45s ease-in-out infinite alternate;
+}
+@keyframes dance {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0) scale(1.03, 0.96);
+  }
+  25% {
+    transform: translateY(-12px) rotate(-7deg) scale(0.98, 1.03);
+  }
+  50% {
+    transform: translateY(0) rotate(0) scale(1.03, 0.96);
+  }
+  75% {
+    transform: translateY(-12px) rotate(7deg) scale(0.98, 1.03);
+  }
+}
+@keyframes wave-l {
+  from {
+    transform: rotate(-14deg);
+  }
+  to {
+    transform: rotate(22deg);
+  }
+}
+@keyframes wave-r {
+  from {
+    transform: rotate(-30deg) translateY(-6px);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+@keyframes step {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  25% {
+    transform: translateY(-7px) scale(0.95, 1.05);
+  }
+  50% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+@keyframes fluff {
+  to {
+    transform: scale(1.025, 0.985);
+  }
+}
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes tongue {
+  to {
+    transform: scaleY(1.25);
+  }
+}
+/* ระหว่างเขย่า/เฉลย ให้หยุดเต้น กระบอกจะได้ไม่ส่ายซ้อนกัน */
+.play:not([data-phase='idle']) .mascot :is(.mascot-dance, .arm, .foot, .body, .tongue) {
+  animation: none;
+}
+
 /* ลดการเคลื่อนไหว */
 @media (prefers-reduced-motion: reduce) {
+  .mascot :is(.mascot-dance, .arm, .foot, .body, .eyes, .tongue),
   [data-phase='shaking'] .shaker-tilt,
   [data-phase='shaking'] .sticks,
   .card,
