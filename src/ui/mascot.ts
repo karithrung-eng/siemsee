@@ -1,4 +1,4 @@
-// มาสคอต "น้องซี้" — กระบอกเซียมซีตุ๊กตาขนฟูแบบ 3D ตากลมโต แก้มแดง แลบลิ้นนิด ๆ
+// มาสคอต "น้องซี้" — กระบอกเซียมซีตุ๊กตาขนฟูแบบ 3D หน้ากวน ตาปรือ คิ้วยัก ยิ้มมุมปากแลบลิ้น
 // มือ/เท้าเป็นปอมปอม เต้นดุ๊กดิ๊กตอนว่าง
 // ใช้ชุดเดียวกันทั้งโลโก้ หน้าเริ่มเกม และกระบอกที่เขย่าได้จริง
 
@@ -174,6 +174,12 @@ export function mascotSVG(opts: MascotOpts = {}): string {
       <stop offset="0" stop-color="#ff5a60"/>
       <stop offset="1" stop-color="#9e1018"/>
     </radialGradient>
+    <clipPath id="${g('eyeclipL')}"><ellipse cx="95" cy="175" rx="15.5" ry="18.5"/></clipPath>
+    <clipPath id="${g('eyeclipR')}"><ellipse cx="145" cy="175" rx="15.5" ry="18.5"/></clipPath>
+    <linearGradient id="${g('lid')}" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff5a60"/>
+      <stop offset="1" stop-color="#c8141d"/>
+    </linearGradient>
     POMGRADS
   </defs>
   <!-- เงาบนพื้น -->
@@ -202,7 +208,7 @@ export function mascotSVG(opts: MascotOpts = {}): string {
       <g filter="url(#${fur})">
         <path d="${BODY_PATH}" fill="${C.red}"/>
         <g clip-path="url(#${clip})">
-          ${shrineBand(116, 24)}
+          ${shrineBand(104, 22)}
           ${shrineBand(236, 22)}
           <rect x="${X0}" y="70" width="${X1 - X0}" height="${BOTTOM - 70}" fill="url(#${g('cyl')})"/>
           <rect x="${X0}" y="70" width="${X1 - X0}" height="${BOTTOM - 70}" fill="url(#${g('cylv')})"/>
@@ -213,21 +219,35 @@ export function mascotSVG(opts: MascotOpts = {}): string {
       <path d="M${X0} ${TOP} A${RX} ${RY} 0 0 0 ${X1} ${TOP}" fill="none" stroke="#ff6d72" stroke-width="5" stroke-linecap="round" opacity=".8" filter="url(#${fur})"/>
     </g>
     <!-- หน้า: ตากลมโตเป็นประกาย แก้มแดง ยิ้มแลบลิ้น -->
-    <g class="face">
+    <g class="face" transform="translate(0 6)">
       <ellipse cx="82" cy="196" rx="14" ry="8" fill="${C.blush}" opacity=".85" filter="url(#${soft})"/>
       <ellipse cx="158" cy="196" rx="14" ry="8" fill="${C.blush}" opacity=".85" filter="url(#${soft})"/>
+      <!-- คิ้วกวน: ซ้ายยักขึ้น ขวากดลง -->
+      <g class="brows" fill="none" stroke="#4a0309" stroke-width="5" stroke-linecap="round">
+        <path d="M80 146 Q94 136 108 146"/>
+        <path d="M132 155 Q146 151 160 152"/>
+      </g>
       <g class="eyes">
         <ellipse cx="95" cy="175" rx="15" ry="18" fill="url(#${g('eye')})"/>
         <ellipse cx="145" cy="175" rx="15" ry="18" fill="url(#${g('eye')})"/>
-        <circle cx="89" cy="167" r="6.5" fill="#fff"/>
-        <circle cx="139" cy="167" r="6.5" fill="#fff"/>
-        <circle cx="101" cy="182" r="2.6" fill="#fff" opacity=".9"/>
-        <circle cx="151" cy="182" r="2.6" fill="#fff" opacity=".9"/>
+        <!-- ตาปรือ: เปลือกตาบนปิดครึ่ง -->
+        <g clip-path="url(#${g('eyeclipL')})"><path d="M76 150 H114 V170 Q95 166 76 171 Z" fill="url(#${g('lid')})"/></g>
+        <g clip-path="url(#${g('eyeclipR')})"><path d="M126 150 H164 V172 Q145 170 126 173 Z" fill="url(#${g('lid')})"/></g>
+        <path d="M78 171 Q95 166 112 170" fill="none" stroke="#2a0207" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M128 173 Q145 170 162 172" fill="none" stroke="#2a0207" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- แววตาเหล่ไปด้านข้าง -->
+        <circle cx="102" cy="178" r="4.5" fill="#fff"/>
+        <circle cx="152" cy="180" r="4.5" fill="#fff"/>
+        <circle cx="90" cy="186" r="2" fill="#fff" opacity=".8"/>
+        <circle cx="140" cy="187" r="2" fill="#fff" opacity=".8"/>
       </g>
+      <!-- ยิ้มมุมปากเบี้ยว + แลบลิ้นข้างขวา -->
       <g class="tongue">
-        <path d="M122 205 v5 a5 5 0 0 0 10 0 v-6" fill="${C.tongue}"/>
+        <path d="M128 205 l1 8 a6.5 6.5 0 0 0 13 -1 l-2 -10" fill="${C.tongue}"/>
+        <path d="M134.5 207 v6" stroke="#c42d5a" stroke-width="2" stroke-linecap="round"/>
       </g>
-      <path d="M109 200 Q114.5 207 120 201 Q125.5 207 131 200" fill="none" stroke="#3a0006" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M104 202 Q122 212 144 199" fill="none" stroke="#3a0006" stroke-width="4" stroke-linecap="round"/>
+      <path d="M141 196 q5 1 6 5" fill="none" stroke="#3a0006" stroke-width="3" stroke-linecap="round"/>
     </g>
   </g>
   </g>

@@ -53,6 +53,12 @@
       <stop offset="0" stop-color="#ff5a60"></stop>
       <stop offset="1" stop-color="#9e1018"></stop>
     </radialGradient>
+    <clipPath id="m1-eyeclipL"><ellipse cx="95" cy="175" rx="15.5" ry="18.5"></ellipse></clipPath>
+    <clipPath id="m1-eyeclipR"><ellipse cx="145" cy="175" rx="15.5" ry="18.5"></ellipse></clipPath>
+    <linearGradient id="m1-lid" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff5a60"></stop>
+      <stop offset="1" stop-color="#c8141d"></stop>
+    </linearGradient>
     <radialGradient id="m1-pom0" cx="42%" cy="38%" r="65%" fx="34%" fy="28%">
         <stop offset="0" stop-color="#ffeba9"></stop>
         <stop offset=".45" stop-color="#FFD23F"></stop>
@@ -117,9 +123,9 @@
       <g filter="url(#m1-fur)">
         <path d="M44 96 L44 232 Q44 276 88 276 L152 276 Q196 276 196 232 L196 96 A76 18 0 0 1 44 96 Z" fill="#E8202A"></path>
         <g clip-path="url(#m1-clip)">
-          <path d="M44 116 A76 18 0 0 0 196 116 L196 140 A76 18 0 0 1 44 140 Z" fill="#FFD23F"></path>
-    <path d="M40 137.0 L48 126.8 L56 146.7 Z M56 146.7 L64 133.2 L72 151.0 Z M72 151.0 L80 136.3 L88 153.3 Z M88 153.3 L96 138.1 L104 154.6 Z M104 154.6 L112 138.9 L120 155.0 Z M120 155.0 L128 138.9 L136 154.6 Z M136 154.6 L144 138.1 L152 153.3 Z M152 153.3 L160 136.3 L168 151.0 Z M168 151.0 L176 133.2 L184 146.7 Z M184 146.7 L192 126.8 L200 137.0 Z" fill="#E8202A"></path>
-    <path d="M44 116 A76 18 0 0 0 196 116 M44 140 A76 18 0 0 0 196 140" fill="none" stroke="#7a0b12" stroke-width="2.5" opacity=".55"></path>
+          <path d="M44 104 A76 18 0 0 0 196 104 L196 126 A76 18 0 0 1 44 126 Z" fill="#FFD23F"></path>
+    <path d="M40 123.0 L48 114.8 L56 132.7 Z M56 132.7 L64 121.2 L72 137.0 Z M72 137.0 L80 124.3 L88 139.3 Z M88 139.3 L96 126.1 L104 140.6 Z M104 140.6 L112 126.9 L120 141.0 Z M120 141.0 L128 126.9 L136 140.6 Z M136 140.6 L144 126.1 L152 139.3 Z M152 139.3 L160 124.3 L168 137.0 Z M168 137.0 L176 121.2 L184 132.7 Z M184 132.7 L192 114.8 L200 123.0 Z" fill="#E8202A"></path>
+    <path d="M44 104 A76 18 0 0 0 196 104 M44 126 A76 18 0 0 0 196 126" fill="none" stroke="#7a0b12" stroke-width="2.5" opacity=".55"></path>
           <path d="M44 236 A76 18 0 0 0 196 236 L196 258 A76 18 0 0 1 44 258 Z" fill="#FFD23F"></path>
     <path d="M40 255.0 L48 246.8 L56 264.7 Z M56 264.7 L64 253.2 L72 269.0 Z M72 269.0 L80 256.3 L88 271.3 Z M88 271.3 L96 258.1 L104 272.6 Z M104 272.6 L112 258.9 L120 273.0 Z M120 273.0 L128 258.9 L136 272.6 Z M136 272.6 L144 258.1 L152 271.3 Z M152 271.3 L160 256.3 L168 269.0 Z M168 269.0 L176 253.2 L184 264.7 Z M184 264.7 L192 246.8 L200 255.0 Z" fill="#E8202A"></path>
     <path d="M44 236 A76 18 0 0 0 196 236 M44 258 A76 18 0 0 0 196 258" fill="none" stroke="#7a0b12" stroke-width="2.5" opacity=".55"></path>
@@ -132,21 +138,35 @@
       <path d="M44 96 A76 18 0 0 0 196 96" fill="none" stroke="#ff6d72" stroke-width="5" stroke-linecap="round" opacity=".8" filter="url(#m1-fur)"></path>
     </g>
     <!-- หน้า: ตากลมโตเป็นประกาย แก้มแดง ยิ้มแลบลิ้น -->
-    <g class="face">
+    <g class="face" transform="translate(0 6)">
       <ellipse cx="82" cy="196" rx="14" ry="8" fill="#FF8CC6" opacity=".85" filter="url(#m1-soft)"></ellipse>
       <ellipse cx="158" cy="196" rx="14" ry="8" fill="#FF8CC6" opacity=".85" filter="url(#m1-soft)"></ellipse>
+      <!-- คิ้วกวน: ซ้ายยักขึ้น ขวากดลง -->
+      <g class="brows" fill="none" stroke="#4a0309" stroke-width="5" stroke-linecap="round">
+        <path d="M80 146 Q94 136 108 146"></path>
+        <path d="M132 155 Q146 151 160 152"></path>
+      </g>
       <g class="eyes">
         <ellipse cx="95" cy="175" rx="15" ry="18" fill="url(#m1-eye)"></ellipse>
         <ellipse cx="145" cy="175" rx="15" ry="18" fill="url(#m1-eye)"></ellipse>
-        <circle cx="89" cy="167" r="6.5" fill="#fff"></circle>
-        <circle cx="139" cy="167" r="6.5" fill="#fff"></circle>
-        <circle cx="101" cy="182" r="2.6" fill="#fff" opacity=".9"></circle>
-        <circle cx="151" cy="182" r="2.6" fill="#fff" opacity=".9"></circle>
+        <!-- ตาปรือ: เปลือกตาบนปิดครึ่ง -->
+        <g clip-path="url(#m1-eyeclipL)"><path d="M76 150 H114 V170 Q95 166 76 171 Z" fill="url(#m1-lid)"></path></g>
+        <g clip-path="url(#m1-eyeclipR)"><path d="M126 150 H164 V172 Q145 170 126 173 Z" fill="url(#m1-lid)"></path></g>
+        <path d="M78 171 Q95 166 112 170" fill="none" stroke="#2a0207" stroke-width="3.5" stroke-linecap="round"></path>
+        <path d="M128 173 Q145 170 162 172" fill="none" stroke="#2a0207" stroke-width="3.5" stroke-linecap="round"></path>
+        <!-- แววตาเหล่ไปด้านข้าง -->
+        <circle cx="102" cy="178" r="4.5" fill="#fff"></circle>
+        <circle cx="152" cy="180" r="4.5" fill="#fff"></circle>
+        <circle cx="90" cy="186" r="2" fill="#fff" opacity=".8"></circle>
+        <circle cx="140" cy="187" r="2" fill="#fff" opacity=".8"></circle>
       </g>
+      <!-- ยิ้มมุมปากเบี้ยว + แลบลิ้นข้างขวา -->
       <g class="tongue">
-        <path d="M122 205 v5 a5 5 0 0 0 10 0 v-6" fill="#FF5C8A"></path>
+        <path d="M128 205 l1 8 a6.5 6.5 0 0 0 13 -1 l-2 -10" fill="#FF5C8A"></path>
+        <path d="M134.5 207 v6" stroke="#c42d5a" stroke-width="2" stroke-linecap="round"></path>
       </g>
-      <path d="M109 200 Q114.5 207 120 201 Q125.5 207 131 200" fill="none" stroke="#3a0006" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M104 202 Q122 212 144 199" fill="none" stroke="#3a0006" stroke-width="4" stroke-linecap="round"></path>
+      <path d="M141 196 q5 1 6 5" fill="none" stroke="#3a0006" stroke-width="3" stroke-linecap="round"></path>
     </g>
   </g>
   </g>
