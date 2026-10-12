@@ -1,4 +1,5 @@
-// มาสคอต "น้องซี้" — กระบอกเซียมซีขนฟูหน้ากวน ตาปรือ แลบลิ้น มือ/เท้าปอมปอม เต้นดุ๊กดิ๊กตอนว่าง
+// มาสคอต "น้องซี้" — กระบอกเซียมซีตุ๊กตาขนฟูแบบ 3D ตากลมโต แก้มแดง แลบลิ้นนิด ๆ
+// มือ/เท้าเป็นปอมปอม เต้นดุ๊กดิ๊กตอนว่าง
 // ใช้ชุดเดียวกันทั้งโลโก้ หน้าเริ่มเกม และกระบอกที่เขย่าได้จริง
 
 export const C = {
@@ -13,33 +14,51 @@ export const C = {
   tongue: '#FF5C8A',
 };
 
-/** ลายขอบศาลเจ้า: แถบเหลืองมีฟันปลาแดงสลับ */
+// รูปทรงกระบอก: ขอบซ้าย/ขวา ปากกระบอกเป็นวงรี
+const X0 = 44;
+const X1 = 196;
+const CX = (X0 + X1) / 2;
+const RX = (X1 - X0) / 2;
+const RY = 18;
+const TOP = 96;
+const BOTTOM = 276;
+
+/** ความโค้งของผิวกระบอกที่ตำแหน่ง x (0 ที่ขอบ, RY ตรงกลาง) */
+const sag = (x: number) => RY * Math.sqrt(Math.max(0, 1 - ((x - CX) / RX) ** 2));
+
+const BODY_PATH = `M${X0} ${TOP} L${X0} ${BOTTOM - 44} Q${X0} ${BOTTOM} ${X0 + 44} ${BOTTOM} L${X1 - 44} ${BOTTOM} Q${X1} ${BOTTOM} ${X1} ${BOTTOM - 44} L${X1} ${TOP} A${RX} ${RY} 0 0 1 ${X0} ${TOP} Z`;
+
+/** ลายขอบศาลเจ้าแบบโค้งตามผิวกระบอก: แถบเหลืองมีฟันปลาแดง */
 function shrineBand(y: number, h: number) {
-  const x0 = 52;
-  const x1 = 188;
+  const band = `M${X0} ${y} A${RX} ${RY} 0 0 0 ${X1} ${y} L${X1} ${y + h} A${RX} ${RY} 0 0 1 ${X0} ${y + h} Z`;
   const teeth: string[] = [];
-  const step = 17;
-  for (let x = x0 + 2; x + step <= x1; x += step) {
-    teeth.push(`M${x} ${y + h - 3} L${x + step / 2} ${y + 5} L${x + step} ${y + h - 3} Z`);
+  const step = 16;
+  for (let x = X0 - 4; x < X1; x += step) {
+    const xm = x + step / 2;
+    const xe = x + step;
+    teeth.push(
+      `M${x} ${(y + h - 3 + sag(x)).toFixed(1)} L${xm} ${(y + 5 + sag(xm)).toFixed(1)} L${xe} ${(y + h - 3 + sag(xe)).toFixed(1)} Z`,
+    );
   }
-  return `
-    <rect x="${x0}" y="${y}" width="${x1 - x0}" height="${h}" fill="${C.yellow}" stroke="${C.ink}" stroke-width="4"/>
-    <path d="${teeth.join(' ')}" fill="${C.red}" stroke="${C.ink}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  return `<path d="${band}" fill="${C.yellow}"/>
+    <path d="${teeth.join(' ')}" fill="${C.red}"/>
+    <path d="M${X0} ${y} A${RX} ${RY} 0 0 0 ${X1} ${y} M${X0} ${y + h} A${RX} ${RY} 0 0 0 ${X1} ${y + h}" fill="none" stroke="#7a0b12" stroke-width="2.5" opacity=".55"/>`;
 }
 
-function sticks() {
+function sticks(grad: string) {
   const list = [
-    { x: 78, top: 34, rot: -9 },
-    { x: 100, top: 22, rot: -4 },
-    { x: 122, top: 30, rot: 2 },
-    { x: 142, top: 18, rot: 6 },
-    { x: 162, top: 38, rot: 11 },
+    { x: 82, top: 40, rot: -10 },
+    { x: 104, top: 26, rot: -4 },
+    { x: 124, top: 34, rot: 2 },
+    { x: 144, top: 22, rot: 7 },
+    { x: 162, top: 42, rot: 12 },
   ];
   return list
     .map(
       (s) => `<g transform="rotate(${s.rot} ${s.x} 120)">
-        <rect x="${s.x - 7}" y="${s.top}" width="14" height="110" rx="5" fill="${C.stick}" stroke="${C.ink}" stroke-width="4"/>
-        <rect x="${s.x - 7}" y="${s.top}" width="14" height="14" rx="5" fill="${C.red}" stroke="${C.ink}" stroke-width="4"/>
+        <rect x="${s.x - 7}" y="${s.top}" width="14" height="96" rx="6" fill="url(#${grad})"/>
+        <rect x="${s.x - 7}" y="${s.top}" width="14" height="15" rx="6" fill="${C.red}"/>
+        <rect x="${s.x - 4}" y="${s.top + 3}" width="3" height="9" rx="1.5" fill="#fff" opacity=".5"/>
       </g>`,
     )
     .join('');
@@ -54,119 +73,163 @@ export interface MascotOpts {
 
 let uid = 0;
 
-/** ปอมปอมขนฟู: วงกลมสี + เงา + ไฮไลต์ แล้วใส่ฟิลเตอร์ขนทั้งก้อน */
-function pom(cx: number, cy: number, r: number, color: string, fur: string) {
-  return `<g filter="url(#${fur})">
-      <circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}"/>
-      <circle cx="${cx + r * 0.18}" cy="${cy + r * 0.22}" r="${r * 0.8}" fill="${C.ink}" opacity=".18"/>
-      <circle cx="${cx - r * 0.3}" cy="${cy - r * 0.32}" r="${r * 0.42}" fill="#fff" opacity=".45"/>
-    </g>`;
+/** สีอ่อน/เข้มลงจากสีหลัก (hex 6 หลัก) */
+function shade(hex: string, amt: number) {
+  const n = parseInt(hex.slice(1), 16);
+  const ch = (v: number) => Math.round(amt >= 0 ? v + (255 - v) * amt : v * (1 + amt));
+  const r = ch(n >> 16);
+  const g = ch((n >> 8) & 255);
+  const b = ch(n & 255);
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
 }
 
 export function mascotSVG(opts: MascotOpts = {}): string {
-  const title = opts.title ?? 'น้องซี้ กระบอกเซียมซีหน้ากวน';
+  const title = opts.title ?? 'น้องซี้ กระบอกเซียมซีขนฟู';
   // id ไม่ซ้ำ เผื่อมีมาสคอตหลายตัวในหน้าเดียว
   const id = `m${++uid}`;
   const fur = `${id}-fur`;
-  const furSoft = `${id}-fur-soft`;
-  const fuzz = `${id}-fuzz`;
   const shag = `${id}-shag`;
-  const shape = `${id}-shape`;
+  const fuzz = `${id}-fuzz`;
+  const soft = `${id}-soft`;
+  const clip = `${id}-clip`;
+  const g = (name: string) => `${id}-${name}`;
+
+  // ปอมปอมทรงกลม 3D: ไล่เฉดจากจุดสว่างมุมซ้ายบน
+  const pomGrads: string[] = [];
+  const pom = (cx: number, cy: number, r: number, color: string) => {
+    const gid = g(`pom${pomGrads.length}`);
+    pomGrads.push(`<radialGradient id="${gid}" cx="42%" cy="38%" r="65%" fx="34%" fy="28%">
+        <stop offset="0" stop-color="${shade(color, 0.55)}"/>
+        <stop offset=".45" stop-color="${color}"/>
+        <stop offset="1" stop-color="${shade(color, -0.45)}"/>
+      </radialGradient>`);
+    return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${gid})" filter="url(#${shag})"/>`;
+  };
+
   const pick = opts.pickStick
     ? `<g class="pick-stick">
-        <rect x="111" y="112" width="26" height="150" rx="8" fill="${C.stick}" stroke="${C.ink}" stroke-width="5"/>
-        <circle cx="124" cy="122" r="25" fill="${C.cream}" stroke="${C.ink}" stroke-width="5"/>
-        <text class="pick-num" x="124" y="132" text-anchor="middle" font-size="28" font-weight="800" fill="${C.ink}" font-family="Kanit, system-ui, sans-serif">?</text>
+        <rect x="111" y="140" width="26" height="130" rx="9" fill="url(#${g('stick')})"/>
+        <circle cx="124" cy="150" r="25" fill="url(#${g('badge')})" stroke="#c98a2b" stroke-width="3"/>
+        <text class="pick-num" x="124" y="160" text-anchor="middle" font-size="28" font-weight="800" fill="${C.ink}" font-family="Kanit, system-ui, sans-serif">?</text>
       </g>`
     : '';
+
+  const handL = pom(18, 150, 24, C.yellow);
+  const handR = pom(222, 196, 23, C.pink);
+  const footL = pom(92, 280, 20, C.cream);
+  const footR = pom(148, 280, 20, C.cream);
+
   return `<svg class="mascot ${opts.className ?? ''}" viewBox="-30 -52 296 372" role="img" aria-label="${title}" xmlns="http://www.w3.org/2000/svg">
   <title>${title}</title>
   <defs>
     <!-- ขอบขนฟู: สุ่มเลื่อนพิกเซลรอบขอบให้เป็นเส้นขนเล็ก ๆ -->
-    <filter id="${fur}" x="-25%" y="-25%" width="150%" height="150%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    <filter id="${fur}" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-    <!-- ขนยาวสำหรับปอมปอม/ขอบนอก -->
+    <!-- ขนยาวสำหรับปอมปอม -->
     <filter id="${shag}" x="-35%" y="-35%" width="170%" height="170%">
       <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="11" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="16" xChannelSelector="R" yChannelSelector="G"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="12" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-    <filter id="${furSoft}" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="8" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-    <!-- ลายขนบนตัว: จุดสว่าง/มืดละเอียด วางทับแบบ soft-light -->
+    <!-- ลายขนบนผิว: จุดสว่างละเอียด -->
     <filter id="${fuzz}" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.55 1.6" numOctaves="3" seed="5"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 2.2 -1.05"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.6 1.5" numOctaves="3" seed="5"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 2 -1"/>
     </filter>
-    <clipPath id="${shape}"><rect x="50" y="90" width="140" height="186" rx="26"/></clipPath>
+    <filter id="${soft}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    <clipPath id="${clip}"><path d="${BODY_PATH}"/></clipPath>
+    <!-- แสงเงาทรงกระบอก: มืดที่ขอบ สว่างเป็นแถบด้านซ้าย -->
+    <linearGradient id="${g('cyl')}" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#3a0006" stop-opacity=".6"/>
+      <stop offset=".14" stop-color="#3a0006" stop-opacity=".12"/>
+      <stop offset=".3" stop-color="#fff" stop-opacity=".32"/>
+      <stop offset=".42" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".72" stop-color="#3a0006" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#3a0006" stop-opacity=".7"/>
+    </linearGradient>
+    <linearGradient id="${g('cylv')}" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".1"/>
+      <stop offset=".75" stop-color="#3a0006" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3a0006" stop-opacity=".45"/>
+    </linearGradient>
+    <radialGradient id="${g('hole')}" cx="50%" cy="65%" r="60%">
+      <stop offset="0" stop-color="#2a0306"/>
+      <stop offset="1" stop-color="#6e0a11"/>
+    </radialGradient>
+    <linearGradient id="${g('stick')}" x1="0" x2="1">
+      <stop offset="0" stop-color="#c98a2b"/>
+      <stop offset=".35" stop-color="#ffe0a0"/>
+      <stop offset="1" stop-color="#b8792a"/>
+    </linearGradient>
+    <radialGradient id="${g('badge')}" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#f3dfb6"/>
+    </radialGradient>
+    <radialGradient id="${g('eye')}" cx="45%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#3b2a4a"/>
+      <stop offset="1" stop-color="#0b0710"/>
+    </radialGradient>
+    <radialGradient id="${g('arm')}" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ff5a60"/>
+      <stop offset="1" stop-color="#9e1018"/>
+    </radialGradient>
+    POMGRADS
   </defs>
+  <!-- เงาบนพื้น -->
+  <ellipse class="ground" cx="120" cy="300" rx="78" ry="11" fill="#000" opacity=".45" filter="url(#${soft})"/>
   <g class="mascot-dance">
   <g class="mascot-shake">
-    <g class="sticks">${sticks()}</g>
+    <!-- ปากกระบอก (ด้านใน) อยู่หลังไม้ -->
+    <ellipse cx="${CX}" cy="${TOP}" rx="${RX}" ry="${RY}" fill="url(#${g('hole')})" filter="url(#${fur})"/>
+    <g class="sticks">${sticks(g('stick'))}</g>
     ${pick}
     <!-- เท้าปอมปอม -->
-    <g class="foot foot-l">${pom(88, 284, 20, C.cream, shag)}</g>
-    <g class="foot foot-r">${pom(152, 284, 20, C.cream, shag)}</g>
-    <!-- เงาทึบแบบสติกเกอร์ -->
-    <g filter="url(#${furSoft})"><rect x="58" y="98" width="140" height="186" rx="26" fill="${C.ink}"/></g>
-    <!-- ตัวกระบอกขนฟู -->
-    <g class="body">
-      <!-- ปุยขนยาวรอบตัว -->
-      <g filter="url(#${shag})">
-        <rect x="46" y="86" width="148" height="194" rx="30" fill="${C.ink}"/>
-      </g>
-      <g filter="url(#${shag})">
-        <rect x="52" y="92" width="136" height="182" rx="24" fill="${C.red}"/>
-      </g>
-      <g filter="url(#${fur})">
-        <rect x="56" y="96" width="128" height="174" rx="22" fill="${C.red}"/>
-      </g>
-      <g clip-path="url(#${shape})">
-        <rect x="50" y="90" width="140" height="186" filter="url(#${fuzz})" opacity=".5" style="mix-blend-mode:soft-light"/>
-        <ellipse cx="96" cy="140" rx="34" ry="60" fill="#fff" opacity=".12"/>
-      </g>
-      <g filter="url(#${furSoft})">
-        <ellipse cx="120" cy="92" rx="70" ry="15" fill="${C.redDark}" stroke="${C.ink}" stroke-width="5"/>
-        ${shrineBand(108, 24)}
-        ${shrineBand(238, 22)}
-      </g>
-    </g>
-    <!-- แขนซ้าย (โบกมือ) มือเป็นปอมปอม -->
+    <g class="foot foot-l">${footL}</g>
+    <g class="foot foot-r">${footR}</g>
+    <!-- แขนซ้าย (โบกมือ) -->
     <g class="arm arm-l">
-      <path d="M54 196 C30 196 18 176 16 150" fill="none" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/>
-      ${pom(16, 134, 25, C.yellow, shag)}
+      <path d="M52 186 C32 184 22 172 20 160" fill="none" stroke="url(#${g('arm')})" stroke-width="15" stroke-linecap="round" filter="url(#${fur})"/>
+      ${handL}
     </g>
-    <!-- แขนขวา (เท้าเอว) -->
+    <!-- แขนขวา -->
     <g class="arm arm-r">
-      <path d="M186 186 C214 186 222 204 210 222" fill="none" stroke="${C.ink}" stroke-width="9" stroke-linecap="round"/>
-      ${pom(210, 230, 24, C.pink, shag)}
+      <path d="M188 192 C202 194 210 196 216 196" fill="none" stroke="url(#${g('arm')})" stroke-width="15" stroke-linecap="round" filter="url(#${fur})"/>
+      ${handR}
     </g>
-    <!-- หน้า: ตาปรือ คิ้วกวน -->
+    <!-- ตัวกระบอกตุ๊กตาขนฟู -->
+    <g class="body">
+      <g filter="url(#${fur})">
+        <path d="${BODY_PATH}" fill="${C.red}"/>
+        <g clip-path="url(#${clip})">
+          ${shrineBand(116, 24)}
+          ${shrineBand(236, 22)}
+          <rect x="${X0}" y="70" width="${X1 - X0}" height="${BOTTOM - 70}" fill="url(#${g('cyl')})"/>
+          <rect x="${X0}" y="70" width="${X1 - X0}" height="${BOTTOM - 70}" fill="url(#${g('cylv')})"/>
+          <rect x="${X0}" y="70" width="${X1 - X0}" height="${BOTTOM - 70}" filter="url(#${fuzz})" opacity=".28"/>
+        </g>
+      </g>
+      <!-- ขอบปากกระบอกด้านหน้า -->
+      <path d="M${X0} ${TOP} A${RX} ${RY} 0 0 0 ${X1} ${TOP}" fill="none" stroke="#ff6d72" stroke-width="5" stroke-linecap="round" opacity=".8" filter="url(#${fur})"/>
+    </g>
+    <!-- หน้า: ตากลมโตเป็นประกาย แก้มแดง ยิ้มแลบลิ้น -->
     <g class="face">
-      <g class="brows">
-        <path d="M78 150 L104 144" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
-        <path d="M134 140 L160 146" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
-      </g>
+      <ellipse cx="82" cy="196" rx="14" ry="8" fill="${C.blush}" opacity=".85" filter="url(#${soft})"/>
+      <ellipse cx="158" cy="196" rx="14" ry="8" fill="${C.blush}" opacity=".85" filter="url(#${soft})"/>
       <g class="eyes">
-        <path d="M76 166 A16 14 0 0 0 108 166 Z" fill="#fff" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M132 166 A16 14 0 0 0 164 166 Z" fill="#fff" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/>
-        <circle cx="96" cy="171" r="5.5" fill="${C.ink}"/>
-        <circle cx="152" cy="171" r="5.5" fill="${C.ink}"/>
-        <path d="M73 166 H111 M129 166 H167" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="95" cy="175" rx="15" ry="18" fill="url(#${g('eye')})"/>
+        <ellipse cx="145" cy="175" rx="15" ry="18" fill="url(#${g('eye')})"/>
+        <circle cx="89" cy="167" r="6.5" fill="#fff"/>
+        <circle cx="139" cy="167" r="6.5" fill="#fff"/>
+        <circle cx="101" cy="182" r="2.6" fill="#fff" opacity=".9"/>
+        <circle cx="151" cy="182" r="2.6" fill="#fff" opacity=".9"/>
       </g>
-      <ellipse cx="74" cy="192" rx="11" ry="7" fill="${C.blush}" filter="url(#${furSoft})"/>
-      <ellipse cx="166" cy="192" rx="11" ry="7" fill="${C.blush}" filter="url(#${furSoft})"/>
-      <!-- ยิ้มมุมปาก + แลบลิ้น -->
       <g class="tongue">
-        <path d="M128 213 v9 a8 8 0 0 0 16 0 v-11" fill="${C.tongue}" stroke="${C.ink}" stroke-width="4.5" stroke-linejoin="round"/>
-        <path d="M136 214 v8" stroke="${C.ink}" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M122 205 v5 a5 5 0 0 0 10 0 v-6" fill="${C.tongue}"/>
       </g>
-      <path d="M102 206 Q124 220 150 204" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/>
+      <path d="M109 200 Q114.5 207 120 201 Q125.5 207 131 200" fill="none" stroke="#3a0006" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
   </g>
   </g>
-</svg>`;
+</svg>`.replace('POMGRADS', pomGrads.join(''));
 }

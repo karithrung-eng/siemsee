@@ -608,7 +608,7 @@ textarea {
 }
 [data-phase='stick'] .pick-stick,
 [data-phase='number'] .pick-stick {
-  transform: translateY(-138px);
+  transform: translateY(-166px);
 }
 [data-phase='idle'] .pick-stick {
   transition: none;
@@ -1115,7 +1115,8 @@ textarea {
 .mascot .foot,
 .mascot .eyes,
 .mascot .tongue,
-.mascot .body {
+.mascot .body,
+.mascot .ground {
   transform-box: fill-box;
 }
 .mascot .mascot-dance {
@@ -1127,7 +1128,7 @@ textarea {
   animation: wave-l 0.45s ease-in-out infinite alternate;
 }
 .mascot .arm-r {
-  transform-origin: 0% 20%;
+  transform-origin: 0% 50%;
   animation: wave-r 0.9s ease-in-out infinite alternate;
 }
 .mascot .foot-l {
@@ -1149,6 +1150,16 @@ textarea {
 .mascot .tongue {
   transform-origin: 50% 0%;
   animation: tongue 0.45s ease-in-out infinite alternate;
+}
+.mascot .ground {
+  transform-origin: 50% 50%;
+  animation: ground 0.45s cubic-bezier(0.45, 0, 0.3, 1) infinite alternate;
+}
+@keyframes ground {
+  to {
+    transform: scale(0.82);
+    opacity: 0.3;
+  }
 }
 @keyframes dance {
   0%,
@@ -1214,13 +1225,13 @@ textarea {
   }
 }
 /* ระหว่างเขย่า/เฉลย ให้หยุดเต้น กระบอกจะได้ไม่ส่ายซ้อนกัน */
-.play:not([data-phase='idle']) .mascot :is(.mascot-dance, .arm, .foot, .body, .tongue) {
+.play:not([data-phase='idle']) .mascot :is(.mascot-dance, .arm, .foot, .body, .tongue, .ground) {
   animation: none;
 }
 
 /* ลดการเคลื่อนไหว */
 @media (prefers-reduced-motion: reduce) {
-  .mascot :is(.mascot-dance, .arm, .foot, .body, .eyes, .tongue),
+  .mascot :is(.mascot-dance, .arm, .foot, .body, .eyes, .tongue, .ground),
   [data-phase='shaking'] .shaker-tilt,
   [data-phase='shaking'] .sticks,
   .card,
