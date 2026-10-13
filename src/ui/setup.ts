@@ -11,7 +11,12 @@ export function logo(): HTMLElement {
     'div',
     { class: 'logo' },
     h('div', { class: 'logo-mascot' }, svg(mascotSVG({ title: 'น้องซี้ มาสคอตเกมเซียมซี้' }))),
-    h('div', { class: 'logo-text' }, h('h1', { class: 'logo-title' }, 'เซียมซี้!'), h('p', { class: 'logo-sub' }, 'เขย่าดวง ป่วนวง')),
+    h(
+      'div',
+      { class: 'logo-text' },
+      h('h1', { class: 'logo-title' }, h('span', { class: 'logo-l1' }, 'เซียมซี้!'), h('span', { class: 'logo-l2' }, 'วงเหล้า')),
+      h('p', { class: 'logo-sub' }, 'เขย่าวง…แล้วดื่มกัน!'),
+    ),
   );
 }
 

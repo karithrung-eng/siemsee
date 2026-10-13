@@ -1,172 +1,173 @@
-<svg class="mascot " viewBox="-30 -52 296 372" role="img" aria-label="น้องซี้ มาสคอตเกมเซียมซี้" xmlns="http://www.w3.org/2000/svg">
+<svg class="mascot " viewBox="-36 -52 308 372" role="img" aria-label="น้องซี้ มาสคอตเกมเซียมซี้" xmlns="http://www.w3.org/2000/svg">
   <title>น้องซี้ มาสคอตเกมเซียมซี้</title>
   <defs>
-    <!-- ขอบขนฟู: สุ่มเลื่อนพิกเซลรอบขอบให้เป็นเส้นขนเล็ก ๆ -->
-    <filter id="m1-fur" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3" result="n"></feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
-    </filter>
-    <!-- ขนยาวสำหรับปอมปอม -->
-    <filter id="m1-shag" x="-35%" y="-35%" width="170%" height="170%">
-      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="11" result="n"></feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="12" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
-    </filter>
-    <!-- ลายขนบนผิว: จุดสว่างละเอียด -->
-    <filter id="m1-fuzz" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.6 1.5" numOctaves="3" seed="5"></feTurbulence>
-      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 2 -1"></feColorMatrix>
-    </filter>
-    <filter id="m1-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter>
-    <clipPath id="m1-clip"><path d="M44 96 L44 232 Q44 276 88 276 L152 276 Q196 276 196 232 L196 96 A76 18 0 0 1 44 96 Z"></path></clipPath>
-    <!-- แสงเงาทรงกระบอก: มืดที่ขอบ สว่างเป็นแถบด้านซ้าย -->
-    <linearGradient id="m1-cyl" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0" stop-color="#3a0006" stop-opacity=".6"></stop>
-      <stop offset=".14" stop-color="#3a0006" stop-opacity=".12"></stop>
-      <stop offset=".3" stop-color="#fff" stop-opacity=".32"></stop>
-      <stop offset=".42" stop-color="#fff" stop-opacity="0"></stop>
-      <stop offset=".72" stop-color="#3a0006" stop-opacity=".08"></stop>
-      <stop offset="1" stop-color="#3a0006" stop-opacity=".7"></stop>
+    <clipPath id="m1-clip"><path d="M46 96 L46 242 Q46 272 76 272 L164 272 Q194 272 194 242 L194 96 A74 17 0 0 1 46 96 Z"></path></clipPath>
+    <!-- แรเงาแบบการ์ตูน: สว่างซ้าย เข้มขวา -->
+    <linearGradient id="m1-cel" x1="0" x2="1">
+      <stop offset="0" stop-color="#ff4a4f"></stop>
+      <stop offset=".62" stop-color="#E8202A"></stop>
+      <stop offset=".63" stop-color="#c3141d"></stop>
+      <stop offset="1" stop-color="#a50f17"></stop>
     </linearGradient>
-    <linearGradient id="m1-cylv" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".1"></stop>
-      <stop offset=".75" stop-color="#3a0006" stop-opacity="0"></stop>
-      <stop offset="1" stop-color="#3a0006" stop-opacity=".45"></stop>
+    <linearGradient id="m1-gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff2a8"></stop>
+      <stop offset=".5" stop-color="#FFC21A"></stop>
+      <stop offset="1" stop-color="#c98a00"></stop>
     </linearGradient>
-    <radialGradient id="m1-hole" cx="50%" cy="65%" r="60%">
-      <stop offset="0" stop-color="#2a0306"></stop>
-      <stop offset="1" stop-color="#6e0a11"></stop>
-    </radialGradient>
-    <linearGradient id="m1-stick" x1="0" x2="1">
-      <stop offset="0" stop-color="#c98a2b"></stop>
-      <stop offset=".35" stop-color="#ffe0a0"></stop>
-      <stop offset="1" stop-color="#b8792a"></stop>
+    <linearGradient id="m1-lens" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#3b3b4a"></stop>
+      <stop offset="1" stop-color="#050507"></stop>
     </linearGradient>
-    <radialGradient id="m1-badge" cx="40%" cy="35%" r="70%">
-      <stop offset="0" stop-color="#fff"></stop>
-      <stop offset="1" stop-color="#f3dfb6"></stop>
-    </radialGradient>
-    <radialGradient id="m1-eye" cx="45%" cy="40%" r="65%">
-      <stop offset="0" stop-color="#3b2a4a"></stop>
-      <stop offset="1" stop-color="#0b0710"></stop>
-    </radialGradient>
-    <radialGradient id="m1-arm" cx="40%" cy="35%" r="70%">
-      <stop offset="0" stop-color="#ff5a60"></stop>
-      <stop offset="1" stop-color="#9e1018"></stop>
-    </radialGradient>
-    <clipPath id="m1-eyeclipL"><ellipse cx="95" cy="175" rx="15.5" ry="18.5"></ellipse></clipPath>
-    <clipPath id="m1-eyeclipR"><ellipse cx="145" cy="175" rx="15.5" ry="18.5"></ellipse></clipPath>
-    <linearGradient id="m1-lid" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0" stop-color="#ff5a60"></stop>
-      <stop offset="1" stop-color="#c8141d"></stop>
-    </linearGradient>
-    <radialGradient id="m1-pom0" cx="42%" cy="38%" r="65%" fx="34%" fy="28%">
-        <stop offset="0" stop-color="#ffeba9"></stop>
-        <stop offset=".45" stop-color="#FFD23F"></stop>
-        <stop offset="1" stop-color="#8c7423"></stop>
-      </radialGradient><radialGradient id="m1-pom1" cx="42%" cy="38%" r="65%" fx="34%" fy="28%">
-        <stop offset="0" stop-color="#ffa8d7"></stop>
-        <stop offset=".45" stop-color="#FF3EA5"></stop>
-        <stop offset="1" stop-color="#8c225b"></stop>
-      </radialGradient><radialGradient id="m1-pom2" cx="42%" cy="38%" r="65%" fx="34%" fy="28%">
-        <stop offset="0" stop-color="#fffaef"></stop>
-        <stop offset=".45" stop-color="#FFF4DC"></stop>
-        <stop offset="1" stop-color="#8c8679"></stop>
-      </radialGradient><radialGradient id="m1-pom3" cx="42%" cy="38%" r="65%" fx="34%" fy="28%">
-        <stop offset="0" stop-color="#fffaef"></stop>
-        <stop offset=".45" stop-color="#FFF4DC"></stop>
-        <stop offset="1" stop-color="#8c8679"></stop>
-      </radialGradient>
   </defs>
-  <!-- เงาบนพื้น -->
-  <ellipse class="ground" cx="120" cy="300" rx="78" ry="11" fill="#000" opacity=".45" filter="url(#m1-soft)"></ellipse>
+  <ellipse class="ground" cx="120" cy="304" rx="96" ry="10" fill="#000" opacity=".5"></ellipse>
   <g class="mascot-dance">
   <g class="mascot-shake">
     <!-- ปากกระบอก (ด้านใน) อยู่หลังไม้ -->
-    <ellipse cx="120" cy="96" rx="76" ry="18" fill="url(#m1-hole)" filter="url(#m1-fur)"></ellipse>
-    <g class="sticks"><g transform="rotate(-10 82 120)">
-        <rect x="75" y="40" width="14" height="96" rx="6" fill="url(#m1-stick)"></rect>
-        <rect x="75" y="40" width="14" height="15" rx="6" fill="#E8202A"></rect>
-        <rect x="78" y="43" width="3" height="9" rx="1.5" fill="#fff" opacity=".5"></rect>
-      </g><g transform="rotate(-4 104 120)">
-        <rect x="97" y="26" width="14" height="96" rx="6" fill="url(#m1-stick)"></rect>
-        <rect x="97" y="26" width="14" height="15" rx="6" fill="#E8202A"></rect>
-        <rect x="100" y="29" width="3" height="9" rx="1.5" fill="#fff" opacity=".5"></rect>
-      </g><g transform="rotate(2 124 120)">
-        <rect x="117" y="34" width="14" height="96" rx="6" fill="url(#m1-stick)"></rect>
-        <rect x="117" y="34" width="14" height="15" rx="6" fill="#E8202A"></rect>
-        <rect x="120" y="37" width="3" height="9" rx="1.5" fill="#fff" opacity=".5"></rect>
-      </g><g transform="rotate(7 144 120)">
-        <rect x="137" y="22" width="14" height="96" rx="6" fill="url(#m1-stick)"></rect>
-        <rect x="137" y="22" width="14" height="15" rx="6" fill="#E8202A"></rect>
-        <rect x="140" y="25" width="3" height="9" rx="1.5" fill="#fff" opacity=".5"></rect>
-      </g><g transform="rotate(12 162 120)">
-        <rect x="155" y="42" width="14" height="96" rx="6" fill="url(#m1-stick)"></rect>
-        <rect x="155" y="42" width="14" height="15" rx="6" fill="#E8202A"></rect>
-        <rect x="158" y="45" width="3" height="9" rx="1.5" fill="#fff" opacity=".5"></rect>
+    <ellipse cx="120" cy="96" rx="74" ry="17" fill="#3a0508" stroke="#111111" stroke-width="5"></ellipse>
+    <g class="sticks"><g transform="rotate(-16 66 130)">
+        <rect x="59" y="44" width="14" height="100" rx="7" fill="#F4C267" stroke="#111111" stroke-width="3.5"></rect>
+        <rect x="63.5" y="62" width="3" height="60" rx="1.5" fill="#fff" opacity=".45"></rect>
+        <path d="M59 59 V51 a7 7 0 0 1 14 0 V59 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+      </g><g transform="rotate(-10 84 130)">
+        <rect x="77" y="26" width="14" height="100" rx="7" fill="#F4C267" stroke="#111111" stroke-width="3.5"></rect>
+        <rect x="81.5" y="44" width="3" height="60" rx="1.5" fill="#fff" opacity=".45"></rect>
+        <path d="M77 41 V33 a7 7 0 0 1 14 0 V41 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+      </g><g transform="rotate(-5 102 130)">
+        <rect x="95" y="16" width="14" height="100" rx="7" fill="#F4C267" stroke="#111111" stroke-width="3.5"></rect>
+        <rect x="99.5" y="34" width="3" height="60" rx="1.5" fill="#fff" opacity=".45"></rect>
+        <path d="M95 31 V23 a7 7 0 0 1 14 0 V31 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+      </g><g transform="rotate(0 120 130)">
+        <rect x="113" y="24" width="14" height="100" rx="7" fill="#F4C267" stroke="#111111" stroke-width="3.5"></rect>
+        <rect x="117.5" y="42" width="3" height="60" rx="1.5" fill="#fff" opacity=".45"></rect>
+        <path d="M113 39 V31 a7 7 0 0 1 14 0 V39 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+      </g><g transform="rotate(5 138 130)">
+        <rect x="131" y="12" width="14" height="100" rx="7" fill="#F4C267" stroke="#111111" stroke-width="3.5"></rect>
+        <rect x="135.5" y="30" width="3" height="60" rx="1.5" fill="#fff" opacity=".45"></rect>
+        <path d="M131 27 V19 a7 7 0 0 1 14 0 V27 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+      </g><g transform="rotate(10 156 130)">
+        <rect x="149" y="26" width="14" height="100" rx="7" fill="#F4C267" stroke="#111111" stroke-width="3.5"></rect>
+        <rect x="153.5" y="44" width="3" height="60" rx="1.5" fill="#fff" opacity=".45"></rect>
+        <path d="M149 41 V33 a7 7 0 0 1 14 0 V41 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+      </g><g transform="rotate(16 174 130)">
+        <rect x="167" y="42" width="14" height="100" rx="7" fill="#F4C267" stroke="#111111" stroke-width="3.5"></rect>
+        <rect x="171.5" y="60" width="3" height="60" rx="1.5" fill="#fff" opacity=".45"></rect>
+        <path d="M167 57 V49 a7 7 0 0 1 14 0 V57 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
       </g></g>
     
-    <!-- เท้าปอมปอม -->
-    <g class="foot foot-l"><circle cx="92" cy="280" r="20" fill="url(#m1-pom2)" filter="url(#m1-shag)"></circle></g>
-    <g class="foot foot-r"><circle cx="148" cy="280" r="20" fill="url(#m1-pom3)" filter="url(#m1-shag)"></circle></g>
-    <!-- แขนซ้าย (โบกมือ) -->
+    <!-- ขา + รองเท้าผ้าใบ -->
+    <g class="foot foot-l"><g transform="translate(92 0) scale(-1 1)">
+    <rect x="-6" y="262" width="12" height="18" fill="#3a3a46" stroke="#111111" stroke-width="2.5"></rect>
+    <path d="M-16 280 q0 -12 12 -12 h8 q10 0 14 8 l14 6 q6 3 6 10 v2 H-16 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+    <path d="M-17 294 H38 v4 q0 5 -5 5 H-12 q-5 0 -5 -5 Z" fill="#fff" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+    <path d="M-2 272 l8 6 M3 270 l8 6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"></path>
+    <path d="M8 286 q10 -2 18 4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+  </g></g>
+    <g class="foot foot-r"><g transform="translate(148 0) scale(1 1)">
+    <rect x="-6" y="262" width="12" height="18" fill="#3a3a46" stroke="#111111" stroke-width="2.5"></rect>
+    <path d="M-16 280 q0 -12 12 -12 h8 q10 0 14 8 l14 6 q6 3 6 10 v2 H-16 Z" fill="#E8202A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+    <path d="M-17 294 H38 v4 q0 5 -5 5 H-12 q-5 0 -5 -5 Z" fill="#fff" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+    <path d="M-2 272 l8 6 M3 270 l8 6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"></path>
+    <path d="M8 286 q10 -2 18 4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+  </g></g>
+    <!-- แขนซ้าย: ชูมือร็อก -->
     <g class="arm arm-l">
-      <path d="M52 186 C32 184 22 172 20 160" fill="none" stroke="url(#m1-arm)" stroke-width="15" stroke-linecap="round" filter="url(#m1-fur)"></path>
-      <circle cx="18" cy="150" r="24" fill="url(#m1-pom0)" filter="url(#m1-shag)"></circle>
+      <path d="M52 192 C30 190 20 176 18 160" fill="none" stroke="#111111" stroke-width="13" stroke-linecap="round"></path>
+      <path d="M52 192 C30 190 20 176 18 160" fill="none" stroke="#c3141d" stroke-width="6" stroke-linecap="round"></path>
+      <g transform="translate(14 138) rotate(-12)">
+  <rect x="-15" y="-34" width="10" height="28" rx="5" fill="#fff" stroke="#111111" stroke-width="3.5"></rect>
+  <rect x="6" y="-36" width="10" height="30" rx="5" fill="#fff" stroke="#111111" stroke-width="3.5"></rect>
+  <ellipse cx="0" cy="2" rx="17" ry="15" fill="#fff" stroke="#111111" stroke-width="3.5"></ellipse>
+  <path d="M-6 -6 q3 -6 6 0 M0 -6 q3 -6 6 0" fill="none" stroke="#111111" stroke-width="2.5" stroke-linecap="round"></path>
+  <ellipse cx="-12" cy="6" rx="8" ry="6" fill="#fff" stroke="#111111" stroke-width="3" transform="rotate(-30 -12 6)"></ellipse>
+  <rect x="-12" y="14" width="24" height="9" rx="4" fill="#fff" stroke="#111111" stroke-width="3.5"></rect></g>
     </g>
-    <!-- แขนขวา -->
+    <!-- แขนขวา: ถือขวด (ลุคแว่น) / แก้วช็อต (ลุคขยิบตา) -->
     <g class="arm arm-r">
-      <path d="M188 192 C202 194 210 196 216 196" fill="none" stroke="url(#m1-arm)" stroke-width="15" stroke-linecap="round" filter="url(#m1-fur)"></path>
-      <circle cx="222" cy="196" r="23" fill="url(#m1-pom1)" filter="url(#m1-shag)"></circle>
+      <path d="M188 196 C206 198 214 196 222 190" fill="none" stroke="#111111" stroke-width="13" stroke-linecap="round"></path>
+      <path d="M188 196 C206 198 214 196 222 190" fill="none" stroke="#c3141d" stroke-width="6" stroke-linecap="round"></path>
+      <g class="look-cool" transform="translate(226 206) rotate(14)">
+  <path d="M-11 0 V-40 q0 -10 7 -16 V-72 h8 V-56 q7 6 7 16 V0 Z" fill="#2f9e44" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+  <rect x="-5" y="-78" width="10" height="8" rx="2" fill="#FFC21A" stroke="#111111" stroke-width="3"></rect>
+  <path d="M-6 -36 V-8" stroke="#bff5c9" stroke-width="3" stroke-linecap="round" opacity=".8"></path>
+  <rect x="-11" y="-30" width="22" height="13" fill="#FFF4DC" stroke="#111111" stroke-width="2.5"></rect></g>
+      <g transform="translate(226 186)">
+  <ellipse cx="0" cy="0" rx="15" ry="14" fill="#fff" stroke="#111111" stroke-width="3.5"></ellipse>
+  <path d="M-10 -6 h18 M-10 0 h18 M-10 6 h16" stroke="#111111" stroke-width="2.5" stroke-linecap="round"></path>
+  <ellipse cx="12" cy="-9" rx="7" ry="5" fill="#fff" stroke="#111111" stroke-width="3"></ellipse></g>
+      <g class="look-wink" transform="translate(222 204) scale(1.15)">
+  <path d="M-14 -34 L14 -34 L11 0 L-11 0 Z" fill="#dff3ff" fill-opacity=".55" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+  <path d="M-12.5 -20 L12.5 -20 L11 0 L-11 0 Z" fill="#f2a516" stroke="#111111" stroke-width="2"></path>
+  <path d="M-8 -30 V-6" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".8"></path></g>
     </g>
-    <!-- ตัวกระบอกตุ๊กตาขนฟู -->
+    <!-- ตัวกระบอก -->
     <g class="body">
-      <g filter="url(#m1-fur)">
-        <path d="M44 96 L44 232 Q44 276 88 276 L152 276 Q196 276 196 232 L196 96 A76 18 0 0 1 44 96 Z" fill="#E8202A"></path>
-        <g clip-path="url(#m1-clip)">
-          <path d="M44 104 A76 18 0 0 0 196 104 L196 126 A76 18 0 0 1 44 126 Z" fill="#FFD23F"></path>
-    <path d="M40 123.0 L48 114.8 L56 132.7 Z M56 132.7 L64 121.2 L72 137.0 Z M72 137.0 L80 124.3 L88 139.3 Z M88 139.3 L96 126.1 L104 140.6 Z M104 140.6 L112 126.9 L120 141.0 Z M120 141.0 L128 126.9 L136 140.6 Z M136 140.6 L144 126.1 L152 139.3 Z M152 139.3 L160 124.3 L168 137.0 Z M168 137.0 L176 121.2 L184 132.7 Z M184 132.7 L192 114.8 L200 123.0 Z" fill="#E8202A"></path>
-    <path d="M44 104 A76 18 0 0 0 196 104 M44 126 A76 18 0 0 0 196 126" fill="none" stroke="#7a0b12" stroke-width="2.5" opacity=".55"></path>
-          <path d="M44 236 A76 18 0 0 0 196 236 L196 258 A76 18 0 0 1 44 258 Z" fill="#FFD23F"></path>
-    <path d="M40 255.0 L48 246.8 L56 264.7 Z M56 264.7 L64 253.2 L72 269.0 Z M72 269.0 L80 256.3 L88 271.3 Z M88 271.3 L96 258.1 L104 272.6 Z M104 272.6 L112 258.9 L120 273.0 Z M120 273.0 L128 258.9 L136 272.6 Z M136 272.6 L144 258.1 L152 271.3 Z M152 271.3 L160 256.3 L168 269.0 Z M168 269.0 L176 253.2 L184 264.7 Z M184 264.7 L192 246.8 L200 255.0 Z" fill="#E8202A"></path>
-    <path d="M44 236 A76 18 0 0 0 196 236 M44 258 A76 18 0 0 0 196 258" fill="none" stroke="#7a0b12" stroke-width="2.5" opacity=".55"></path>
-          <rect x="44" y="70" width="152" height="206" fill="url(#m1-cyl)"></rect>
-          <rect x="44" y="70" width="152" height="206" fill="url(#m1-cylv)"></rect>
-          <rect x="44" y="70" width="152" height="206" filter="url(#m1-fuzz)" opacity=".28"></rect>
+      <path d="M46 96 L46 242 Q46 272 76 272 L164 272 Q194 272 194 242 L194 96 A74 17 0 0 1 46 96 Z" fill="url(#m1-cel)"></path>
+      <g clip-path="url(#m1-clip)">
+        <path d="M46 104 A74 17 0 0 0 194 104 L194 124 A74 17 0 0 1 46 124 Z" fill="#FFD23F" stroke="#111111" stroke-width="3"></path>
+    <path d="M42 121.0 L49.5 114.2 L57 129.9 Z M57 129.9 L64.5 120.2 L72 133.9 Z M72 133.9 L79.5 123.2 L87 136.2 Z M87 136.2 L94.5 125.0 L102 137.5 Z M102 137.5 L109.5 125.8 L117 138.0 Z M117 138.0 L124.5 126.0 L132 137.8 Z M132 137.8 L139.5 125.4 L147 136.8 Z M147 136.8 L154.5 124.0 L162 135.0 Z M162 135.0 L169.5 121.6 L177 131.8 Z M177 131.8 L184.5 117.3 L192 124.9 Z M192 124.9 L199.5 109.0 L207 121.0 Z" fill="#E8202A" stroke="#111111" stroke-width="1.6" stroke-linejoin="round"></path>
+        <path d="M46 234 A74 17 0 0 0 194 234 L194 254 A74 17 0 0 1 46 254 Z" fill="#FFD23F" stroke="#111111" stroke-width="3"></path>
+    <path d="M42 251.0 L49.5 244.2 L57 259.9 Z M57 259.9 L64.5 250.2 L72 263.9 Z M72 263.9 L79.5 253.2 L87 266.2 Z M87 266.2 L94.5 255.0 L102 267.5 Z M102 267.5 L109.5 255.8 L117 268.0 Z M117 268.0 L124.5 256.0 L132 267.8 Z M132 267.8 L139.5 255.4 L147 266.8 Z M147 266.8 L154.5 254.0 L162 265.0 Z M162 265.0 L169.5 251.6 L177 261.8 Z M177 261.8 L184.5 247.3 L192 254.9 Z M192 254.9 L199.5 239.0 L207 251.0 Z" fill="#E8202A" stroke="#111111" stroke-width="1.6" stroke-linejoin="round"></path>
+        <!-- ลายกราฟฟิตี้ -->
+        <g fill="none" stroke="#5a0309" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".85">
+          <path d="M60 158 l6 -8 l5 6 l5 -8 l4 10 Z"></path>
+          <path d="M162 214 q6 -10 12 0 q-6 8 -12 0 M164 222 l8 0"></path>
+          <path d="M58 226 q8 -6 14 2 q6 8 14 0"></path>
         </g>
       </g>
-      <!-- ขอบปากกระบอกด้านหน้า -->
-      <path d="M44 96 A76 18 0 0 0 196 96" fill="none" stroke="#ff6d72" stroke-width="5" stroke-linecap="round" opacity=".8" filter="url(#m1-fur)"></path>
+      <path d="M46 96 L46 242 Q46 272 76 272 L164 272 Q194 272 194 242 L194 96 A74 17 0 0 1 46 96 Z" fill="none" stroke="#111111" stroke-width="5" stroke-linejoin="round"></path>
+      <path d="M58 130 V200" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".35"></path>
     </g>
-    <!-- หน้า: ตากลมโตเป็นประกาย แก้มแดง ยิ้มแลบลิ้น -->
-    <g class="face" transform="translate(0 6)">
-      <ellipse cx="82" cy="196" rx="14" ry="8" fill="#FF8CC6" opacity=".85" filter="url(#m1-soft)"></ellipse>
-      <ellipse cx="158" cy="196" rx="14" ry="8" fill="#FF8CC6" opacity=".85" filter="url(#m1-soft)"></ellipse>
-      <!-- คิ้วกวน: ซ้ายยักขึ้น ขวากดลง -->
-      <g class="brows" fill="none" stroke="#4a0309" stroke-width="5" stroke-linecap="round">
-        <path d="M80 146 Q94 136 108 146"></path>
-        <path d="M132 155 Q146 151 160 152"></path>
+
+    <!-- ===== ลุคแว่นดำ ===== -->
+    <g class="face look-cool">
+      <path d="M78 140 Q92 128 106 136" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round"></path>
+      <path d="M136 140 Q150 136 162 142" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round"></path>
+      <!-- แว่นกันแดด -->
+      <path d="M62 150 H178" stroke="#111111" stroke-width="5" stroke-linecap="round"></path>
+      <path d="M66 150 H112 q2 0 2 3 q-2 22 -22 22 h-6 q-18 0 -20 -22 q0 -3 2 -3 Z" fill="url(#m1-lens)" stroke="#111111" stroke-width="4" stroke-linejoin="round"></path>
+      <path d="M128 150 H174 q2 0 2 3 q-2 22 -22 22 h-6 q-18 0 -20 -22 q0 -3 2 -3 Z" fill="url(#m1-lens)" stroke="#111111" stroke-width="4" stroke-linejoin="round"></path>
+      <path d="M74 156 l10 -3 M134 156 l10 -3" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"></path>
+      <path d="M76 162 l4 -1 M136 162 l4 -1" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".6"></path>
+      <!-- ยิ้มเยาะ เขี้ยว + แลบลิ้น -->
+      <path d="M98 192 Q120 214 150 190" fill="#5a0309" stroke="#111111" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"></path>
+      <g class="tongue"><path d="M118 200 q-2 18 10 20 q12 1 10 -20 Z" fill="#FF5C8A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+        <path d="M128 204 v8" stroke="#c42d5a" stroke-width="2" stroke-linecap="round"></path></g>
+      <path d="M140 194 l-3 8 l-4 -6 Z" fill="#fff" stroke="#111111" stroke-width="2" stroke-linejoin="round"></path>
+      <!-- สร้อยทอง + เหรียญ "เฮ้" -->
+      <path d="M58 202 Q120 250 182 202" fill="none" stroke="url(#m1-gold)" stroke-width="6" stroke-dasharray="6 3" stroke-linecap="round"></path>
+      <path d="M58 202 Q120 250 182 202" fill="none" stroke="#111111" stroke-width="1.5" opacity=".5" stroke-dasharray="6 3"></path>
+      <circle cx="120" cy="238" r="16" fill="url(#m1-gold)" stroke="#111111" stroke-width="3.5"></circle>
+      <text x="120" y="244" text-anchor="middle" font-size="15" font-weight="800" fill="#111111" font-family="Kanit, system-ui, sans-serif">เฮ้</text>
+    </g>
+
+    <!-- ===== ลุคผ้าโพกหัวขยิบตา ===== -->
+    <g class="face look-wink">
+      <path d="M43 104 A77 17 0 0 0 197 104 L197 128 A77 17 0 0 1 43 128 Z" fill="#1b1b1f" stroke="#111111" stroke-width="4"></path>
+      <g fill="#fff">
+        <circle cx="66" cy="124" r="2.6"></circle><circle cx="84" cy="130" r="2.2"></circle><circle cx="104" cy="134" r="2.6"></circle>
+        <circle cx="136" cy="134" r="2.2"></circle><circle cx="156" cy="130" r="2.6"></circle><circle cx="174" cy="124" r="2.2"></circle>
+        <path d="M120 128 l3 -6 l3 6 l-3 6 Z M114 131 l6 -3 l0 6 Z M126 131 l-6 -3 l0 6 Z"></path>
       </g>
+      <path d="M196 116 q14 -6 22 4 q-10 0 -14 10 Z" fill="#1b1b1f" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path>
+      <!-- ตาซ้ายขยิบ ตาขวาโต -->
+      <path d="M76 168 q12 -10 26 0" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round"></path>
+      <path d="M78 150 l20 6" stroke="#111111" stroke-width="5" stroke-linecap="round"></path>
       <g class="eyes">
-        <ellipse cx="95" cy="175" rx="15" ry="18" fill="url(#m1-eye)"></ellipse>
-        <ellipse cx="145" cy="175" rx="15" ry="18" fill="url(#m1-eye)"></ellipse>
-        <!-- ตาปรือ: เปลือกตาบนปิดครึ่ง -->
-        <g clip-path="url(#m1-eyeclipL)"><path d="M76 150 H114 V170 Q95 166 76 171 Z" fill="url(#m1-lid)"></path></g>
-        <g clip-path="url(#m1-eyeclipR)"><path d="M126 150 H164 V172 Q145 170 126 173 Z" fill="url(#m1-lid)"></path></g>
-        <path d="M78 171 Q95 166 112 170" fill="none" stroke="#2a0207" stroke-width="3.5" stroke-linecap="round"></path>
-        <path d="M128 173 Q145 170 162 172" fill="none" stroke="#2a0207" stroke-width="3.5" stroke-linecap="round"></path>
-        <!-- แววตาเหล่ไปด้านข้าง -->
-        <circle cx="102" cy="178" r="4.5" fill="#fff"></circle>
-        <circle cx="152" cy="180" r="4.5" fill="#fff"></circle>
-        <circle cx="90" cy="186" r="2" fill="#fff" opacity=".8"></circle>
-        <circle cx="140" cy="187" r="2" fill="#fff" opacity=".8"></circle>
+        <ellipse cx="148" cy="166" rx="17" ry="19" fill="#fff" stroke="#111111" stroke-width="4"></ellipse>
+        <circle cx="152" cy="168" r="9" fill="#111111"></circle>
+        <circle cx="155" cy="164" r="3" fill="#fff"></circle>
       </g>
-      <!-- ยิ้มมุมปากเบี้ยว + แลบลิ้นข้างขวา -->
-      <g class="tongue">
-        <path d="M128 205 l1 8 a6.5 6.5 0 0 0 13 -1 l-2 -10" fill="#FF5C8A"></path>
-        <path d="M134.5 207 v6" stroke="#c42d5a" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M132 144 q16 -8 32 2" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round"></path>
+      <ellipse cx="78" cy="190" rx="10" ry="6" fill="#FF8CC6" opacity=".8"></ellipse>
+      <!-- ยิ้มกว้าง ฟันทอง แลบลิ้น -->
+      <path d="M92 192 Q120 230 160 190 Q124 202 92 192 Z" fill="#5a0309" stroke="#111111" stroke-width="4.5" stroke-linejoin="round"></path>
+      <path d="M98 194 Q124 202 154 192 l-2 6 Q124 207 100 199 Z" fill="#fff"></path>
+      <rect x="134" y="194" width="8" height="7" rx="1.5" fill="url(#m1-gold)" stroke="#111111" stroke-width="1.5"></rect>
+      <g class="tongue"><path d="M112 206 q0 20 14 20 q12 -2 10 -20 Z" fill="#FF5C8A" stroke="#111111" stroke-width="3.5" stroke-linejoin="round"></path></g>
+      <!-- หัวกะโหลกกราฟฟิตี้ -->
+      <g fill="none" stroke="#111111" stroke-width="2.5" stroke-linecap="round" opacity=".8">
+        <circle cx="168" cy="222" r="7"></circle><path d="M164 230 h8 M160 236 l16 -8 M160 228 l16 8"></path>
       </g>
-      <path d="M104 202 Q122 212 144 199" fill="none" stroke="#3a0006" stroke-width="4" stroke-linecap="round"></path>
-      <path d="M141 196 q5 1 6 5" fill="none" stroke="#3a0006" stroke-width="3" stroke-linecap="round"></path>
     </g>
   </g>
   </g>

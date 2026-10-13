@@ -41,6 +41,13 @@ export function playScreen(game: Game, onBack: () => void): { el: HTMLElement; d
   const mascot = svg(mascotSVG({ pickStick: true, title: 'กระบอกเซียมซี ลากซ้ายขวาเพื่อเขย่า' }));
   const shaker = h('div', { class: 'shaker', 'aria-hidden': 'false' }, h('div', { class: 'shaker-tilt' }, mascot));
   const bubble = h('div', { class: 'bubble', role: 'status', 'aria-live': 'assertive' });
+  // คำพูดน้องซี้ (ตกแต่ง) สลับตามจังหวะด้วย CSS
+  const say = h(
+    'div',
+    { class: 'say', 'aria-hidden': 'true' },
+    h('p', { class: 'say-idle' }, 'เขย่าเลยสิ', h('br'), 'จะรออะไร', h('br'), h('b', {}, 'ไอ้น้องงง!')),
+    h('p', { class: 'say-roll' }, 'ใครจะโดน', h('br'), 'วันนี้…', h('br'), h('b', {}, 'มาลุ้นกัน!!')),
+  );
   const shakeBtn = h('button', { class: 'btn btn-primary btn-xl shake-btn', type: 'button' }, 'เขย่าเลย!');
   const motionBtn = h('button', { class: 'link-btn motion-btn', type: 'button', 'aria-pressed': String(motionOn) });
   const paintMotion = () => {
@@ -49,7 +56,7 @@ export function playScreen(game: Game, onBack: () => void): { el: HTMLElement; d
   };
   paintMotion();
   const hint = h('p', { class: 'hint' }, 'ลากกระบอกซ้าย–ขวา กดปุ่ม หรือกด Space');
-  const stage = h('section', { class: 'stage', 'aria-label': 'กระบอกเซียมซี' }, shaker, bubble, h('div', { class: 'stage-actions' }, shakeBtn, hint, motionSupported() ? motionBtn : null));
+  const stage = h('section', { class: 'stage', 'aria-label': 'กระบอกเซียมซี' }, shaker, say, bubble, h('div', { class: 'stage-actions' }, shakeBtn, hint, motionSupported() ? motionBtn : null));
 
   // ---------- ผลลัพธ์
   const doers = h('p', { class: 'doers' });
