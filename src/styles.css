@@ -219,7 +219,7 @@ a {
   gap: 6px;
 }
 .logo-mascot {
-  width: 104px;
+  width: 116px;
   flex: none;
 }
 .logo-mascot svg {
@@ -608,7 +608,7 @@ textarea {
 }
 [data-phase='stick'] .pick-stick,
 [data-phase='number'] .pick-stick {
-  transform: translateY(-138px);
+  transform: translateY(-166px);
 }
 [data-phase='idle'] .pick-stick {
   transition: none;
@@ -1109,8 +1109,129 @@ textarea {
   transform: translate(-50%, 0);
 }
 
+/* ---------- น้องซี้เต้นดุ๊กดิ๊ก (ตอนว่าง) */
+.mascot .mascot-dance,
+.mascot .arm,
+.mascot .foot,
+.mascot .eyes,
+.mascot .tongue,
+.mascot .body,
+.mascot .ground {
+  transform-box: fill-box;
+}
+.mascot .mascot-dance {
+  transform-origin: 50% 100%;
+  animation: dance 0.9s cubic-bezier(0.45, 0, 0.3, 1) infinite;
+}
+.mascot .arm-l {
+  transform-origin: 100% 100%;
+  animation: wave-l 0.45s ease-in-out infinite alternate;
+}
+.mascot .arm-r {
+  transform-origin: 0% 50%;
+  animation: wave-r 0.9s ease-in-out infinite alternate;
+}
+.mascot .foot-l {
+  transform-origin: 50% 50%;
+  animation: step 0.9s ease-in-out infinite;
+}
+.mascot .foot-r {
+  transform-origin: 50% 50%;
+  animation: step 0.9s ease-in-out infinite 0.45s;
+}
+.mascot .body {
+  transform-origin: 50% 100%;
+  animation: fluff 0.45s ease-in-out infinite alternate;
+}
+.mascot .eyes {
+  transform-origin: 50% 70%;
+  animation: blink 3.6s infinite;
+}
+.mascot .tongue {
+  transform-origin: 50% 0%;
+  animation: tongue 0.45s ease-in-out infinite alternate;
+}
+.mascot .ground {
+  transform-origin: 50% 50%;
+  animation: ground 0.45s cubic-bezier(0.45, 0, 0.3, 1) infinite alternate;
+}
+@keyframes ground {
+  to {
+    transform: scale(0.82);
+    opacity: 0.3;
+  }
+}
+@keyframes dance {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0) scale(1.03, 0.96);
+  }
+  25% {
+    transform: translateY(-12px) rotate(-7deg) scale(0.98, 1.03);
+  }
+  50% {
+    transform: translateY(0) rotate(0) scale(1.03, 0.96);
+  }
+  75% {
+    transform: translateY(-12px) rotate(7deg) scale(0.98, 1.03);
+  }
+}
+@keyframes wave-l {
+  from {
+    transform: rotate(-14deg);
+  }
+  to {
+    transform: rotate(22deg);
+  }
+}
+@keyframes wave-r {
+  from {
+    transform: rotate(-30deg) translateY(-6px);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+@keyframes step {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  25% {
+    transform: translateY(-7px) scale(0.95, 1.05);
+  }
+  50% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+@keyframes fluff {
+  to {
+    transform: scale(1.025, 0.985);
+  }
+}
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes tongue {
+  to {
+    transform: scaleY(1.25);
+  }
+}
+/* ระหว่างเขย่า/เฉลย ให้หยุดเต้น กระบอกจะได้ไม่ส่ายซ้อนกัน */
+.play:not([data-phase='idle']) .mascot :is(.mascot-dance, .arm, .foot, .body, .tongue, .ground) {
+  animation: none;
+}
+
 /* ลดการเคลื่อนไหว */
 @media (prefers-reduced-motion: reduce) {
+  .mascot :is(.mascot-dance, .arm, .foot, .body, .eyes, .tongue, .ground),
   [data-phase='shaking'] .shaker-tilt,
   [data-phase='shaking'] .sticks,
   .card,
@@ -1147,4 +1268,394 @@ textarea {
     font-size: clamp(24px, 7vw, 28px);
     margin: 4px 0 6px;
   }
+}
+
+/* ---------- น้องซี้สองลุค: แว่นดำ (ปกติ) / ผ้าโพกหัวขยิบตา (ระหว่างลุ้น) */
+.mascot .look-wink {
+  display: none;
+}
+.play:is([data-phase='shaking'], [data-phase='stick'], [data-phase='number']) .mascot .look-wink {
+  display: inline;
+}
+.play:is([data-phase='shaking'], [data-phase='stick'], [data-phase='number']) .mascot .look-cool {
+  display: none;
+}
+
+/* =====================================================================
+   ธีม "วงเหล้า": บาร์มืด ไฟนีออน ป้ายไม้ กระดาษ ปุ่มแปรงสีชมพู
+   ===================================================================== */
+:root {
+  --bg: #1a0a18;
+  --wood: #6b3a1c;
+  --wood-dark: #2a1408;
+  --paper: #f1e6cc;
+  --paper-ink: #1b1410;
+  --paper-muted: #6b5a44;
+  --hand: 'Sriracha', 'Kanit', system-ui, sans-serif;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html,
+body {
+  background: var(--bg);
+}
+
+/* ---- ฉากหลังบาร์ (อยู่หลังทุกหน้า) */
+.bar-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(3px 3px at 12% 18%, #ffb3e0cc, transparent),
+    radial-gradient(4px 4px at 28% 9%, #ffd27acc, transparent),
+    radial-gradient(3px 3px at 46% 22%, #b9a2ffcc, transparent),
+    radial-gradient(5px 5px at 70% 6%, #ffd27a99, transparent),
+    radial-gradient(3px 3px at 88% 30%, #ff9ad6cc, transparent),
+    radial-gradient(22px 22px at 8% 40%, #ff3ea533, transparent),
+    radial-gradient(30px 30px at 92% 52%, #7a5cff33, transparent),
+    radial-gradient(26px 26px at 30% 58%, #ffb34733, transparent),
+    radial-gradient(60% 38% at 85% 18%, #ff2aa055, transparent 70%),
+    radial-gradient(55% 40% at 10% 28%, #7a3cff44, transparent 70%),
+    radial-gradient(45% 30% at 50% -4%, #ffae4a40, transparent 70%),
+    repeating-linear-gradient(90deg, #ffffff05 0 2px, transparent 2px 46px),
+    linear-gradient(#1c0b1e, #12060f 70%, #0c0408);
+}
+.neon {
+  position: absolute;
+  font-family: var(--hand);
+  font-size: clamp(22px, 7vw, 34px);
+  line-height: 1.12;
+  text-align: center;
+  opacity: 0.5;
+  transform: rotate(-8deg);
+  padding: 8px 12px;
+  border-radius: 14px;
+}
+.neon-pink {
+  right: -6px;
+  top: 16%;
+  color: #ffd6f0;
+  border: 3px solid #ff4fc0;
+  text-shadow: 0 0 4px #ff4fc0, 0 0 14px #ff2aa0, 0 0 28px #ff2aa0;
+  box-shadow: 0 0 14px #ff2aa0, inset 0 0 14px #ff2aa0;
+}
+.neon-blue {
+  left: -8px;
+  top: 52%;
+  font-family: var(--font);
+  font-weight: 800;
+  color: #dcd3ff;
+  border: 3px solid #8a6bff;
+  text-shadow: 0 0 4px #8a6bff, 0 0 14px #6b4bff, 0 0 26px #6b4bff;
+  box-shadow: 0 0 14px #6b4bff, inset 0 0 14px #6b4bff;
+  transform: rotate(6deg);
+  opacity: 0.35;
+}
+.bar-table {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
+  background:
+    linear-gradient(#0000004d, transparent 30%),
+    repeating-linear-gradient(178deg, #ffffff08 0 2px, transparent 2px 9px),
+    linear-gradient(#5a2e14, #3a1c0c 60%, #240f06);
+  border-top: 3px solid #1a0b04;
+  box-shadow: 0 -14px 30px #00000080;
+}
+
+/* ---- ปุ่มแปรงสีชมพู */
+.btn-primary {
+  border: none;
+  box-shadow: none;
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(100deg, #ffffff26 0 3px, transparent 3px 11px),
+    linear-gradient(#ff5cbc, #ff2a98);
+  clip-path: polygon(1% 14%, 6% 4%, 22% 8%, 40% 2%, 63% 7%, 82% 1%, 97% 6%, 100% 30%, 98% 58%, 100% 86%, 92% 97%, 70% 93%, 48% 99%, 27% 94%, 8% 99%, 0% 80%, 2% 52%);
+  text-shadow: 1px 1px 0 #fff8;
+  letter-spacing: 0.3px;
+}
+.btn-primary:active {
+  box-shadow: none;
+  transform: translate(2px, 2px) scale(0.99);
+}
+.btn-xl {
+  font-size: 26px;
+  font-weight: 800;
+  min-height: 66px;
+}
+.shake-btn::before,
+.setup-footer .btn-primary::before {
+  content: '🍺';
+  font-size: 0.95em;
+  margin-right: 4px;
+}
+.btn.is-disabled,
+[data-phase]:not([data-phase='idle']) .shake-btn {
+  background: linear-gradient(#77737a, #58555c);
+  color: #2b2a2e;
+}
+
+/* ---- แถบบน: ป้ายไม้แขวน */
+.topbar-mid {
+  flex: 0 1 auto;
+  margin: 0 auto;
+  padding: 5px 16px;
+  border: 3px solid var(--wood-dark);
+  border-radius: 6px;
+  background:
+    radial-gradient(3px 3px at 8px 50%, #d9c9a8 60%, transparent 70%),
+    radial-gradient(3px 3px at calc(100% - 8px) 50%, #d9c9a8 60%, transparent 70%),
+    repeating-linear-gradient(178deg, #00000022 0 2px, transparent 2px 7px),
+    linear-gradient(#8a4d26, #5e3218);
+  box-shadow: 0 4px 0 #0008;
+  transform: rotate(-1.5deg);
+}
+.round {
+  color: var(--cream);
+  text-shadow: 2px 2px 0 var(--wood-dark);
+}
+.topbar-mid .chip {
+  background: var(--cream);
+  border-color: var(--ink);
+}
+.icon-btn {
+  background: #111;
+  border-color: var(--cream);
+}
+
+/* ---- โลโก้ */
+.logo {
+  gap: 0;
+  align-items: center;
+}
+.logo-mascot {
+  width: 128px;
+  margin-right: -6px;
+  filter: drop-shadow(0 0 18px #ff3ea566);
+}
+.logo-title {
+  display: flex;
+  flex-direction: column;
+  font-size: 50px;
+  line-height: 0.8;
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+  transform: rotate(-4deg);
+}
+.logo-l1 {
+  background: linear-gradient(#fff3a0, #ffc21a 45%, #ff7a1a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--ink);
+  filter: drop-shadow(3px 3px 0 var(--ink));
+  font-style: italic;
+}
+.logo-l2 {
+  font-size: 44px;
+  margin-left: 18px;
+  background: linear-gradient(#fff, #ffb3df 30%, #ff2a98);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--ink);
+  filter: drop-shadow(3px 3px 0 var(--ink));
+  font-style: italic;
+}
+.logo-sub {
+  margin-top: 6px;
+  padding: 3px 14px;
+  border: none;
+  border-radius: 0;
+  background: var(--yellow);
+  clip-path: polygon(0 10%, 5% 0, 30% 6%, 60% 0, 96% 5%, 100% 50%, 97% 100%, 60% 92%, 30% 100%, 3% 94%);
+  font-size: 17px;
+  transform: rotate(-3deg);
+}
+.hero-note {
+  color: var(--cream);
+  text-shadow: 0 1px 3px #000;
+}
+
+/* ---- แผงกระดาษ */
+.panel {
+  background-color: var(--paper);
+  background-image: var(--grain);
+  color: var(--paper-ink);
+  border: none;
+  border-radius: 4px;
+  clip-path: polygon(0 1%, 4% 0, 18% 1.2%, 40% 0.2%, 66% 1.4%, 88% 0, 100% 1%, 99.4% 30%, 100% 62%, 99.2% 99%, 80% 100%, 55% 98.8%, 30% 100%, 8% 99%, 0 100%, 0.6% 60%, 0 30%);
+}
+.panel:nth-of-type(odd) {
+  transform: rotate(-0.6deg);
+}
+.panel:nth-of-type(even) {
+  transform: rotate(0.5deg);
+}
+.panel .muted,
+.panel .count-unit {
+  color: var(--paper-muted);
+}
+.panel h2 {
+  font-size: 21px;
+}
+.step-btn {
+  box-shadow: 4px 4px 0 0 var(--ink);
+}
+.step-btn:disabled {
+  color: #888;
+  background: #c9c0ad;
+}
+.panel .seat-diagram {
+  background: #1d1418;
+  border-radius: 50%;
+  padding: 4px;
+}
+.panel .cat {
+  background: #2a211c;
+  color: #e8dcc4;
+  border-color: #2a211c;
+}
+.panel .cat:has(input:checked) {
+  background: var(--pink);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+.panel .consent {
+  border-color: var(--ink);
+}
+.panel .consent input {
+  border-color: var(--ink);
+}
+.panel .link-btn,
+.panel .toggle {
+  color: var(--paper-ink);
+  border-color: var(--paper-ink);
+}
+.panel .toggle[aria-pressed='true'] {
+  background: var(--paper-ink);
+  color: var(--paper);
+}
+.seg {
+  background: #1b1410;
+  color: #e8dcc4;
+  border-color: #1b1410;
+  border-radius: 999px;
+}
+.seg[aria-pressed='true'] {
+  background: var(--pink);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+details.names summary {
+  color: var(--paper-ink);
+}
+
+/* ---- เทปเหลือง */
+.fineprint,
+.start-reason,
+.warn {
+  background: var(--yellow);
+  color: var(--ink);
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(0 6%, 4% 0, 35% 5%, 70% 0, 98% 4%, 100% 50%, 98% 100%, 66% 95%, 33% 100%, 2% 96%);
+  font-weight: 600;
+  padding: 8px 14px;
+}
+.fineprint {
+  transform: rotate(-1.5deg);
+  margin: 16px 6px 8px;
+}
+
+/* ---- แถบล่างเป็นโต๊ะไม้ */
+.setup-footer,
+.result-actions {
+  border-top: 3px solid #120700;
+  background:
+    repeating-linear-gradient(178deg, #ffffff0a 0 2px, transparent 2px 9px),
+    linear-gradient(#4a2510, #2c1508);
+}
+
+/* ---- หน้าเล่น */
+.shaker {
+  background: radial-gradient(closest-side at 50% 56%, #ff3ea54d, #ff3ea51a 60%, transparent);
+}
+.hint {
+  color: var(--cream);
+  text-shadow: 0 1px 3px #000;
+}
+.motion-btn {
+  background: #0009;
+  border-color: var(--cream);
+}
+.say {
+  position: absolute;
+  left: 10px;
+  top: 4%;
+  max-width: 46%;
+  pointer-events: none;
+  z-index: 2;
+  transform: rotate(-9deg);
+}
+.say p {
+  position: relative;
+  margin: 0;
+  padding: 10px 16px 12px;
+  background: #fff;
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 50% / 46%;
+  font-family: var(--hand);
+  font-size: clamp(15px, 4.6vw, 20px);
+  line-height: 1.15;
+  text-align: center;
+  box-shadow: 4px 4px 0 #0007;
+}
+.say p::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  bottom: -14px;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-right: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  transform: skew(28deg) rotate(30deg);
+}
+.say b {
+  color: var(--red);
+  font-weight: 400;
+  font-size: 1.15em;
+}
+.say-roll {
+  display: none;
+}
+.play:is([data-phase='shaking'], [data-phase='stick']) .say-idle {
+  display: none;
+}
+.play:is([data-phase='shaking'], [data-phase='stick']) .say-roll {
+  display: block;
+}
+.play[data-phase='number'] .say {
+  display: none;
+}
+.bubble {
+  font-family: var(--font);
+  box-shadow: 6px 6px 0 0 var(--ink);
+  background: var(--yellow);
+}
+body {
+  background: transparent;
+}
+.logo-l1,
+.logo-l2 {
+  padding: 0.18em 0.08em 0.04em;
 }
